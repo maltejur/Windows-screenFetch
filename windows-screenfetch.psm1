@@ -29,17 +29,24 @@ Function Screenfetch($distro)
     $SystemInfoCollection = . Get-SystemSpecifications;
     $LineToTitleMappings = . Get-LineToTitleMappings;
 
+    $lines = If ( $SystemInfoCollection.Count -gt $AsciiArt.Count ) { $SystemInfoCollection.Count } else { $AsciiArt.Count }
+
+    # Space on top
+    Write-Host "";
+
     # Iterate over all lines from the SystemInfoCollection to display all information
-    for ($line = 0; $line -lt $SystemInfoCollection.Count; $line++) 
+    for ($line = 0; $line -lt $lines; $line++) 
     {
         if (($AsciiArt[$line].Length) -eq 0)
         {
             # Write some whitespaces to sync the left spacing with the asciiart.
-            Write-Host "                                        " -f Cyan -NoNewline;
+            Write-Host "                                            " -f Cyan -NoNewline;
         }
         else
         {
+            Write-Host "  " -NoNewline;
             Write-Host $AsciiArt[$line] -f Cyan -NoNewline;
+            Write-Host "  " -NoNewline;
         }
         Write-Host $LineToTitleMappings[$line] -f Red -NoNewline;
 
@@ -64,5 +71,7 @@ Function Screenfetch($distro)
             Write-Host $SystemInfoCollection[$line];            
         }
     }
+    # Space on bottom
+    Write-Host "";
 }
 

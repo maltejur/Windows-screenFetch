@@ -19,6 +19,7 @@ Function Get-SystemSpecifications()
 
     [System.Collections.ArrayList] $SystemInfoCollection = 
         $UserInfo, 
+        "",
         $OS, 
         $Kernel,
         $Uptime,
@@ -43,17 +44,18 @@ Function Get-LineToTitleMappings()
 { 
     $TitleMappings = @{
         0 = "";
-        1 = "OS: "; 
-        2 = "Kernel: ";
-        3 = "Uptime: ";
-        4 = "Motherboard: ";
-        5 = "Shell: ";
-        6 = "Resolution: ";
-        7 = "Window Manager: ";
-        8 = "Font: ";
-        9 = "CPU: ";
-        10 = "GPU ";
-        11 = "RAM: ";
+        1 = "";
+        2 = "OS: "; 
+        3 = "Kernel: ";
+        4 = "Uptime: ";
+        5 = "Motherboard: ";
+        6 = "Shell: ";
+        7 = "Resolution: ";
+        8 = "Window Manager: ";
+        9 = "Font: ";
+        10 = "CPU: ";
+        11 = "GPU ";
+        12 = "RAM: ";
     };
 
     return $TitleMappings;
@@ -197,11 +199,7 @@ Function Get-Disks()
                 }
             }
             else {
-                $DiskSizeGB = 0;
-                $FreeDiskSizeGB = 0;
-                $FreeDiskPercent = 0;
-                $UsedDiskSizeGB = 0;
-                $UsedDiskPercent = 100;
+                continue
             }
 
             $FormattedDisk = "Disk " + $DiskID.ToString() + " " + 
